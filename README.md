@@ -1,3 +1,0 @@
-# argmaxlp.github.io
-
-Hello
