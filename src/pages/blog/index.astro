@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
+---
+
+<Base title="Blog — Argmax" current="blog">
+  <section class="page">
+    <h1 class="rise">Blog</h1>
+    {
+      posts.length === 0 ? (
+        <p class="empty rise">Nothing yet.</p>
+      ) : (
+        <ul class="post-list rise">
+          {posts.map((post) => (
+            <li>
+              <time datetime={fmt(post.data.date)}>{fmt(post.data.date)}</time>
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Base>

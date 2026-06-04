@@ -1,0 +1,63 @@
+---
+import '@fontsource-variable/newsreader';
+import '@fontsource-variable/newsreader/wght-italic.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  current?: 'about' | 'blog' | 'contact';
+}
+
+const {
+  title,
+  description = 'Argmax is a quant firm specializing in prediction markets.',
+  current,
+} = Astro.props;
+
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f0efea" />
+    <link rel="icon" type="image/svg+xml" href="/mark.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Argmax" />
+    <meta property="og:image" content={new URL('/og.png', Astro.site)} />
+  </head>
+  <body>
+    <header>
+      <div class="wrap nav">
+        <a class="wordmark" href="/">
+          <img class="nav-mark" src="/mark.svg" alt="" width="528" height="343" />
+          Argmax
+        </a>
+        <nav>
+          <a href="/about/" class:list={[{ active: current === 'about' }]}>about</a>
+          <a href="/blog/" class:list={[{ active: current === 'blog' }]}>blog</a>
+          <a href="/contact/" class:list={[{ active: current === 'contact' }]}>contact</a>
+        </nav>
+      </div>
+    </header>
+    <main class="wrap">
+      <slot />
+    </main>
+    <footer>
+      <div class="wrap foot">
+        <span>© {year} Argmax</span>
+        <span>x* = arg maxₓ f(x)</span>
+      </div>
+    </footer>
+  </body>
+</html>

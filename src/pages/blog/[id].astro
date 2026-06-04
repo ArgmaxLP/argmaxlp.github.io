@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const date = post.data.date.toISOString().slice(0, 10);
+---
+
+<Base
+  title={`${post.data.title} — Argmax`}
+  description={post.data.description}
+  current="blog"
+>
+  <article class="post">
+    <div class="post-meta rise">
+      <a class="back-link" href="/blog/">← blog</a>
+      <time datetime={date}>{date}</time>
+    </div>
+    <h1 class="rise">{post.data.title}</h1>
+    <div class="prose rise">
+      <Content />
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,15 @@
+{
+  "name": "argmaxlp-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@fontsource-variable/newsreader": "^5.2.5",
+    "@fontsource/ibm-plex-mono": "^5.2.5",
+    "astro": "^5.0.0"
+  }
+}
