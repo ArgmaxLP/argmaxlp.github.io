@@ -10,6 +10,9 @@
   "dependencies": {
     "@fontsource-variable/newsreader": "^5.2.5",
     "@fontsource/ibm-plex-mono": "^5.2.5",
-    "astro": "^5.0.0"
+    "astro": "^5.0.0",
+    "katex": "^0.17.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0"
   }
 }
